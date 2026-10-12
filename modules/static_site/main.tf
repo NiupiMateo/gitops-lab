@@ -9,13 +9,13 @@ resource "random_string" "suffix" {
 }
 
 resource "azurerm_storage_account" "site" {
-  name                          = local.sa_name
-  resource_group_name           = var.resource_group_name
-  location                      = var.location
-  account_tier                  = "Standard"
-  account_replication_type      = "LRS"
-  account_kind                  = "StorageV2"
-  min_tls_version               = "TLS1_2"
+  name                            = local.sa_name
+  resource_group_name             = var.resource_group_name
+  location                        = var.location
+  account_tier                    = "Standard"
+  account_replication_type        = "LRS"
+  account_kind                    = "StorageV2"
+  min_tls_version                 = "TLS1_2"
   allow_nested_items_to_be_public = false
 
   blob_properties {
@@ -34,7 +34,7 @@ resource "azurerm_storage_account" "site" {
     }
   }
 
-  tags                          = var.tags
+  tags = var.tags
 }
 
 resource "azurerm_storage_account_static_website" "site" {
