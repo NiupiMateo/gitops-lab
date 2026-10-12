@@ -2,4 +2,10 @@ framework:
   - terraform
 compact: true
 quiet: true
-skip-check: []
+skip-check:
+  - CKV_AZURE_59    # El sitio web estático requiere acceso público para servir contenido a los usuarios finales
+  - CKV_AZURE_206   # Se usa LRS porque es un laboratorio académico; GRS no es necesario para contenido estático regenerable
+  - CKV2_AZURE_41   # No se usan tokens SAS; la autenticación se realiza mediante Azure AD (OIDC)
+  - CKV2_AZURE_40   # El acceso al contenedor $web requiere Shared Key para la escritura de blobs por Terraform
+  - CKV2_AZURE_33   # Un private endpoint no es viable para un sitio web estático público de un laboratorio académico
+  - CKV2_AZURE_1    # Customer Managed Keys excede el alcance de un laboratorio académico con Azure Free Trial

@@ -17,7 +17,24 @@ resource "azurerm_storage_account" "site" {
   account_kind                    = "StorageV2"
   min_tls_version                 = "TLS1_2"
   allow_nested_items_to_be_public = false
-  tags                            = var.tags
+
+  blob_properties {
+    delete_retention_policy {
+      days = 7
+    }
+  }
+
+  queue_properties {
+    logging {
+      delete                = true
+      read                  = true
+      write                 = true
+      version               = "1.0"
+      retention_policy_days = 7
+    }
+  }
+
+  tags = var.tags
 }
 
 resource "azurerm_storage_account_static_website" "site" {
